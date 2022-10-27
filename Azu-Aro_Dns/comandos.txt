@@ -1,0 +1,98 @@
+#----------------------------------------------------------------
+# remote-exec
+#----------------------------------------------------------------
+
+
+resource "null_resource" "remote" {
+  provisioner "remote-exec" {
+    connection {
+      host     = azurerm_public_ip.my_terraform_public_ip2.ip_address
+      type     = "winrm"
+      port     = 5985
+      https    = false
+      timeout  = "5m"
+      user     = "adminuser"
+      password = "P@$$w0rd1234!"
+    }
+    inline = [
+      "powershell.exe -ExecutionPolicy Unrestricted -Command {Install-WindowsFeature -name Web-Server -IncludeManagementTools}",
+    ]
+  }
+}
+
+
+resource "azurerm_virtual_machine_extension" "avmme0" {
+  name                 = "${var.env}-${var.vm_computer_name}-config"  
+  location             = "West US"  
+  resource_group_name  = "${module.network.resource-grp-name}"  
+  virtual_machine_name = "${azurerm_virtual_machine.avmweb0.name}"  
+  publisher            = "Microsoft.Compute"  
+  type                 = "CustomScriptExtension"  
+  type_handler_version = "1.8"  settings = <<SETTINGS
+    {
+        "fileUris": ["https://raw.githubusercontent.com/saveshnshetty/devops/master/userdata.ps1"],
+        "commandToExecute": "powershell.exe -ExecutionPolicy unrestricted -NoProfile -NonInteractive -File userdata.ps1"
+    }
+SETTINGS  
+tags {
+        Name            = "${var.env}-${var.bu}-${var.company_name}-media"
+        BussinessUnit   = "${var.bu}"
+        Environment     = "${var.env}"
+        CompanyName     = "${var.company_name}"
+
+
+resource "azurerm_virtual_machine_extension" "linux-script" {
+  name = azurerm_virtual_machine.main.name
+  virtual_machine_id   = azurerm_virtual_machine.main.id 
+  publisher            = "Microsoft.Azure.Extensions"
+  type                 = "CustomScript"
+  type_handler_version = "2.0"
+  settings             = <<SETTINGS
+        {
+            "commandToExecute": "sudo echo hostname && uptime > t1.txt"
+        }
+SETTINGS
+  depends_on = [
+    azurerm_virtual_machine.main
+  ]
+}
+
+
+resource "azurerm_virtual_machine_extension" "win-script" {
+  name = azurerm_windows_virtual_machine.example.name 
+  virtual_machine_id   = azurerm_windows_virtual_machine.example.id 
+  publisher            = "Microsoft.Azure.Extensions"
+  type                 = "CustomScript"
+  type_handler_version = "2.0"
+  settings             = <<SETTINGS
+        {
+          "fileUris": ["https://raw.githubusercontent.com/nandofpc/act/main/ad.ps1"],
+          "commandToExecute": "powershell.exe -ExecutionPolicy unrestricted -NoProfile -NonInteractive -File ad.ps1"
+        }
+SETTINGS
+  depends_on = [
+    azurerm_windows_virtual_machine.example
+  ]
+}
+
+
+
+Add-WindowsFeature AD-Domain-Services
+$file = "Dns@!!f@$$0rd#s@1jR$!"
+$pw = read-host -prompt "Password:" -assecurestring
+$pw | ConvertFrom-SecureString | Set-Content $file
+Install-ADDSForest -DomainName corp.local -InstallDNS -safemodeadministratorpassword (Get-Content $File | ConvertTo-SecureString -force)
+
+
+&& sudo echo "<?php echo gethostname (); print getenv("FOO") ?>" > /var/www/html/index.php"
+
+
+
+
+
+
+$file = "P@$$w0rd1234!"
+$pw = read-host -prompt "Password:" -assecurestring
+$pw | ConvertFrom-SecureString | Set-Content $file
+
+-safemodeadministratorpassword (Get-Content $File | ConvertTo-SecureString)
