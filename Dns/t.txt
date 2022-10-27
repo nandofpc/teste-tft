@@ -1,0 +1,19 @@
+https://community.spiceworks.com/topic/262635-linux-does-not-register-on-the-windows-ad-dns
+https://www.pythontutorial.net/python-basics/python-write-text-file/
+https://docs.ansible.com/ansible/2.3/nsupdate_module.html#requirements-on-host-that-executes-module
+
+
+
+nsupdate /var/nsupdate.txt
+
+#Executando o Script
+import subprocess
+exit_code = subprocess.call('./dns.sh')
+print(exit_code)
+
+
+
+#gravando arquivo de texto
+lines = [var_comand]
+with open('ns.txt', 'w') as f:
+    f.writelines(lines)
