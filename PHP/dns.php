@@ -1,11 +1,9 @@
 <html>
 <body>
-
-<form action="welcome_get.php" method="get">
-Name: <input type="text" name="name"><br>
-E-mail: <input type="text" name="email"><br>
-<input type="submit">
+<form method="get" action="welcome_get.php">
+<p>Name: <input type="text" name="name"></p>
+<p>Email: <input type="email" name="email"></p>
+<input type="submit" value="Submit">
 </form>
-
 </body>
 </html>
