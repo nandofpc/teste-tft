@@ -1,0 +1,5 @@
+server 172.16.1.5
+zone arodns.local
+update add dfdfdfd.arodns.local 86400 A 434343
+send
+quit

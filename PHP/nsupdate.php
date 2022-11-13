@@ -26,8 +26,8 @@ fclose($myfile);
 //$COMANDO = 'nsupdate server '. $SERVIDOR . ' zone '. $DOMAIN . ' update add ' . $AMBIENTE. '.' . $DOMAIN . ' 86400 A ' . $IPLBAPI;
 echo '<br>';
 //$data = (shell_exec('pwsh ' . $COMANDO));
-$data = (shell_exec('nsupdate ns.txt'));
-echo $COMANDO;
+$data = (shell_exec('nsupdate ns.txt 2>&1; echo $?'));
+//echo $COMANDO;
 echo '<br>';
-echo $data
+echo $data;
 ?>
