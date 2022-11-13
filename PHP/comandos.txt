@@ -1,0 +1,71 @@
+# Squad Conectividade
+# Update DNS Record
+
+$ambiente = "aroteste123"
+$DOMAIN = "arodns.local"
+$IPLBAPI = "172.16.1.196"
+
+Add-DnsServerResourceRecordA -Name $AMBIENTE -ZoneName $DOMAIN -IPv4Address $IPLBAPI
+
+######################### powershell em linux #########################################
+
+#!/bin/bash
+# cd /etc
+# mkdir teste
+# cd teste
+# touch main.py abc.py xyz.txt
+sudo apt-get update
+
+sudo timedatectl set-timezone America/Sao_Paulo
+
+sudo apt-get install gss-ntlmssp
+
+# Download the Microsoft repository GPG keys
+wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb
+
+# Register the Microsoft repository GPG keys
+sudo dpkg -i packages-microsoft-prod.deb
+
+# Update the list of products
+sudo apt-get update
+
+# Install PowerShell
+sudo apt-get install -y powershell
+
+sudo git clone https://github.com/sullo/nikto
+
+########################################################################
+
+Habilitando o powershell remoto windows
+
+https://learn.microsoft.com/pt-br/troubleshoot/windows-server/remote/how-to-enable-windows-remote-shell
+
+instalar este comando no powershell do linux,, rodar o pwsh com sudo
+Install-Module -Name PSWSMan -Scope AllUsers
+Install-WSMan
+
+######################################################################
+
+<html>
+<body>
+Welcome <?php echo $_GET["name"]; ?>
+<br>
+Your email address is: <?php echo $_GET["email"]; ?>
+
+</body>
+</html>
+
+#################################
+
+<html>
+<body>
+
+<form action="welcome_get.php" method="get">
+<p>IP: <input type="text" name="ip"></p>
+
+<p>Hostname: <input type="text" name="hostname"></p>
+<input type="submit">
+</form>
+
+</body>
+</html>
