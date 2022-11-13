@@ -23,10 +23,10 @@ fwrite($myfile, $txt);
 fclose($myfile);
 
 //$COMANDO = 'Add-DnsServerResourceRecordA -Name '. $AMBIENTE . ' -ZoneName '. $DOMAIN . ' -IPv4Address '. $IPLBAPI;
-$COMANDO = 'nsupdate server '. $SERVIDOR . ' zone '. $DOMAIN . ' update add ' . $AMBIENTE. '.' . $DOMAIN . ' 86400 A ' . $IPLBAPI;
+//$COMANDO = 'nsupdate server '. $SERVIDOR . ' zone '. $DOMAIN . ' update add ' . $AMBIENTE. '.' . $DOMAIN . ' 86400 A ' . $IPLBAPI;
 echo '<br>';
 //$data = (shell_exec('pwsh ' . $COMANDO));
-$data = (shell_exec($COMANDO));
+$data = (shell_exec('nsupdate ns.txt'));
 echo $COMANDO;
 echo '<br>';
 echo $data
