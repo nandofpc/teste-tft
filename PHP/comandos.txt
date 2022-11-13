@@ -69,3 +69,10 @@ Your email address is: <?php echo $_GET["email"]; ?>
 
 </body>
 </html>
+
+############################
+server 172.16.1.5
+zone arodns.local
+update add maq3.arodns.local. 86400 A 172.16.1.70
+send
+quit
