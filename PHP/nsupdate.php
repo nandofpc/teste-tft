@@ -1,6 +1,6 @@
 <?php 
 
-# Update DNS Record
+
 // nsupdate server 172.16.1.5 zona ardns.local pdate add leon.arodns.local. 86400 A 172.16.1.50
 $AMBIENTE = $_GET["hostname"];
 $SERVIDOR = '172.16.1.5';
@@ -21,6 +21,8 @@ fwrite($myfile, $txt);
 $txt = "quit\n";
 fwrite($myfile, $txt);
 fclose($myfile);
+
+# Update DNS Record
 
 //$COMANDO = 'Add-DnsServerResourceRecordA -Name '. $AMBIENTE . ' -ZoneName '. $DOMAIN . ' -IPv4Address '. $IPLBAPI;
 //$COMANDO = 'nsupdate server '. $SERVIDOR . ' zone '. $DOMAIN . ' update add ' . $AMBIENTE. '.' . $DOMAIN . ' 86400 A ' . $IPLBAPI;
